@@ -3,6 +3,10 @@ from __future__ import annotations
 import argparse, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, sys
 
 SKILL = pathlib.Path(__file__).resolve().parents[1]
+ENCODER_WAIT = '\n        ff.stdin.close(); ff.wait()\n'
+ENCODER_CHECK = (ENCODER_WAIT +
+    '        if ff.returncode != 0: raise SystemExit(f"FFmpeg failed with exit code {ff.returncode}")\n'
+    '        if not Path(vid).is_file() or Path(vid).stat().st_size == 0: raise SystemExit("FFmpeg produced no video output")\n')
 
 def tools():
     home=pathlib.Path.home()
@@ -30,6 +34,9 @@ def environment():
 def init(project):
     target=project/'production'
     if target.exists(): raise RuntimeError('Refusing to overwrite existing production directory')
+    upstream_render=SKILL/'upstream/scripts/engine/render.py'
+    if upstream_render.read_text(encoding='utf-8').count(ENCODER_WAIT)!=1:
+        raise RuntimeError('Unsupported upstream renderer: encoder status check could not be installed')
     project.mkdir(parents=True,exist_ok=True)
     shutil.copytree(SKILL/'upstream/scripts',target,ignore=shutil.ignore_patterns('__pycache__'))
     for page in ('index.html', 'clip.html'):
@@ -43,10 +50,11 @@ def init(project):
         # Supply a dedicated headless browser executable; no user profile is used.
         text=text.replace('.chromium.launch(args=', '.chromium.launch(executable_path=__import__("os").environ.get("COOPER_BROWSER") or None, args=')
         text=text.replace("'--enable-gpu-rasterization', '--ignore-gpu-blocklist'", "'--disable-accelerated-2d-canvas'")
+        if script == target/'engine/render.py': text=text.replace(ENCODER_WAIT,ENCODER_CHECK,1)
         if text!=old:
             script.write_text(text,encoding='utf-8')
             changes.append({'path':str(script.relative_to(project)),'before':hashlib.sha256(old.encode()).hexdigest(),'after':hashlib.sha256(text.encode()).hexdigest()})
-    receipt={'adapterVersion':'0.1.0','upstream':'8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c','patches':changes}
+    receipt={'adapterVersion':'0.1.2','upstream':'8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c','patches':changes}
     (project/'engine-adapter.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'engine':str(target/'engine'),'patches':len(changes)},ensure_ascii=False))
 
