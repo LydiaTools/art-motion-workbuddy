@@ -1,0 +1,11 @@
+{
+  "grammar":"y3_whiteboard", "duration":6, "fps":15, "width":960, "height":540, "theme":"chalk",
+  "cues":[
+    {"at":0.0,"kind":"draw","text":"A useful idea","data":{"icon":"bulb"}},
+    {"at":1.0,"kind":"point","text":"Starts with a real question"},
+    {"at":2.0,"kind":"draw","text":"Read the replies","data":{"icon":"target"}},
+    {"at":3.0,"kind":"point","text":"Look for what people need"},
+    {"at":4.0,"kind":"draw","text":"Make it tangible","data":{"icon":"clock"}},
+    {"at":5.0,"kind":"point","text":"Build, test, and share"}
+  ]
+}
