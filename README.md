@@ -16,6 +16,16 @@ An original, silent six-second example rendered locally with this package. The p
 
 ## Get started
 
+For a **Codex project**, install the small entry-point Skill with the optional third-party skills CLI (Node 22.20+):
+
+```sh
+npx skills@1.7.4 add LydiaTools/art-motion-workbuddy --skill art-motion-workbuddy --agent codex
+```
+
+When you first use it, the Skill prepares the complete v0.1.1 package in a new directory: approximately 17 MB downloaded from this repository's release, checked against a pinned SHA-256. You can supply an already downloaded matching ZIP instead. Installation of the entry point alone does not install the engine or its dependencies. The entry point is from current repository source; it is separate from the fixed v0.1.1 ZIP.
+
+Or install the full package manually:
+
 1. Download `art-motion-workbuddy-v0.1.1.zip` from the [release page](https://github.com/LydiaTools/art-motion-workbuddy/releases/tag/v0.1.1) and extract it.
 2. Copy the entire `art-motion-workbuddy` folder into your WorkBuddy or Codex skills directory and refresh the skill list. Keep `SKILL.md`, `scripts/` and `upstream/` together.
 3. Install Python, Playwright, Pillow, NumPy, a supported browser, FFmpeg and FFprobe. Run `python scripts/local_engine.py doctor` to check available dependencies.
@@ -48,7 +58,7 @@ Based on [huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion), c
 
 安装依赖后，可在解压的 Skill 目录运行上方“Reproduce the whiteboard example”中的两条命令；Windows 将 `python3` 改为 `python`，需要时用 `COOPER_BROWSER` 指定浏览器路径。示例只验证了本机白板片段，不代表所有动画风格和平台均已验收。
 
-**安装方式：**从 [v0.1.1 发行页](https://github.com/LydiaTools/art-motion-workbuddy/releases/tag/v0.1.1)下载完整 Skill 压缩包，解压后将整个 `art-motion-workbuddy` 文件夹放入对应 Skill 目录，刷新技能列表。请保留包内完整目录，不要只复制 `SKILL.md`。本版修复了片段渲染时缺少图标导致的误报，并让 `--spec` 相对路径按命令执行目录解析；原压缩包仍保留在仓库中。
+**安装方式：**Codex 用户也可在项目里运行上方 `npx skills` 命令安装轻量入口；首次使用时需要从发行页下载约 17 MB 的完整资源并校验哈希，也可使用已下载的同版本 ZIP。入口本身不包含引擎或渲染依赖。或者从 [v0.1.1 发行页](https://github.com/LydiaTools/art-motion-workbuddy/releases/tag/v0.1.1)下载完整 Skill 压缩包，解压后将整个 `art-motion-workbuddy` 文件夹放入对应 Skill 目录，刷新技能列表。请保留包内完整目录，不要只复制 `SKILL.md`。本版修复了片段渲染时缺少图标导致的误报，并让 `--spec` 相对路径按命令执行目录解析；原压缩包仍保留在仓库中。
 
 **运行条件：**需要 Python、Playwright、Pillow、NumPy、浏览器、FFmpeg 和 FFprobe，可先运行 `python scripts/local_engine.py doctor` 检查。具体镜头可能需要编写场景、调整节奏，音乐、配音和画面素材请自行提供或使用有权使用的资源。
 
