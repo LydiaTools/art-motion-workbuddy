@@ -12,8 +12,8 @@ import unicodedata
 import urllib.request
 import zipfile
 
-URL = "https://github.com/LydiaTools/art-motion-workbuddy/releases/download/v0.1.1/art-motion-workbuddy-v0.1.1.zip"
-SHA256 = "cd688513101d3150d9c45281fc06c7fbc4199c64f27adb21f0cf27980ed462d4"
+URL = "https://github.com/LydiaTools/art-motion-workbuddy/releases/download/v0.1.2/art-motion-workbuddy-v0.1.2.zip"
+SHA256 = "d0eff94ddf9c108bf630921462f7ff86e4f6026f92db17d0603c0cbabfe761b8"
 MAX_ARCHIVE = 32 * 1024 * 1024
 MAX_EXPANDED = 128 * 1024 * 1024
 MAX_MEMBERS = 1500
