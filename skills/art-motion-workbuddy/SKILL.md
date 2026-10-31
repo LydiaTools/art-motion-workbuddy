@@ -12,7 +12,7 @@ This small installable entry point prepares the full **v0.1.1** package when nee
 
 ## Prepare and make a project
 
-Resolve the helper relative to this installed `SKILL.md`, not the current directory. Select a new absolute runtime path outside the installed skill and a separate new project directory:
+Resolve the helper relative to this installed `SKILL.md`, not the current directory. Select a new absolute runtime path whose parent directory already exists, outside the installed skill, and a separate new project directory:
 
 ```sh
 python3 /absolute/path/to/art-motion-workbuddy/scripts/prepare.py --target /absolute/path/to/new-runtime

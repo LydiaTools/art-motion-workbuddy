@@ -102,6 +102,8 @@ def main():
         target = args.target.expanduser().absolute()
         if target.exists() or target.is_symlink():
             raise ValueError('Target already exists; choose a new directory.')
+        if not target.parent.is_dir():
+            raise ValueError('Target parent directory must already exist.')
         if args.archive:
             result = prepare(args.archive.expanduser(), target)
         else:
