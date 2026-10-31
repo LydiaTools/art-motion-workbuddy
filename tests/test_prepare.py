@@ -1,9 +1,12 @@
 import hashlib
 import importlib.util
+import io
+from contextlib import redirect_stderr
 from pathlib import Path
 import stat
 import tempfile
 import unittest
+from unittest.mock import patch
 from zipfile import ZipFile, ZipInfo
 
 SCRIPT = Path(__file__).parents[1] / 'skills/art-motion-workbuddy/scripts/prepare.py'
@@ -72,6 +75,12 @@ class PrepareTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'symbolic link'):
             module.prepare(archive, self.root / 'runtime')
         self.assertFalse((self.root / 'runtime').exists())
+
+    def test_cli_checks_missing_parent_before_network(self):
+        args = ['prepare.py', '--target', str(self.root / 'missing-parent' / 'runtime')]
+        with patch.object(module.sys, 'argv', args), patch.object(module, 'download') as download, redirect_stderr(io.StringIO()):
+            self.assertEqual(module.main(), 1)
+        download.assert_not_called()
 
 
 if __name__ == '__main__':
