@@ -19,10 +19,10 @@ An original, silent six-second example rendered locally with this package. The p
 For a **Codex project**, install the small entry-point Skill with the optional third-party skills CLI (Node 22.20+):
 
 ```sh
-npx skills@1.7.4 add LydiaTools/art-motion-workbuddy --skill art-motion-workbuddy --agent codex
+npx skills@1.7.4 add 'https://github.com/LydiaTools/art-motion-workbuddy/tree/entry-v0.1.2/skills/art-motion-workbuddy' --skill art-motion-workbuddy --agent codex
 ```
 
-When you first use it, the Skill prepares the complete v0.1.2 package in a new directory: approximately 17 MB downloaded from this repository's release, checked against a pinned SHA-256. You can supply an already downloaded matching ZIP instead. Installation of the entry point alone does not install the engine or its dependencies. The entry point is from current repository source; it is separate from the fixed v0.1.2 ZIP.
+The command installs the lightweight `entry-v0.1.2` branch, a snapshot of the entry files in this repository. On first use, the Skill prepares the complete v0.1.2 package in a new directory: approximately 17 MB downloaded from this repository's release, checked against a pinned SHA-256. You can supply an already downloaded matching ZIP instead. Installation of the entry point alone does not install the engine or its dependencies. This entry is pinned to v0.1.2; check this page for newer versions.
 
 Or install the full package manually:
 
@@ -60,7 +60,7 @@ Based on [huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion), c
 
 安装依赖后，可在解压的 Skill 目录运行上方“Reproduce the whiteboard example”中的两条命令；Windows 将 `python3` 改为 `python`，需要时用 `COOPER_BROWSER` 指定浏览器路径。示例只验证了本机白板片段，不代表所有动画风格和平台均已验收。
 
-**安装方式：**Codex 用户也可在项目里运行上方 `npx skills` 命令安装轻量入口；首次使用时需要从发行页下载约 17 MB 的完整资源并校验哈希，也可使用已下载的同版本 ZIP。入口本身不包含引擎或渲染依赖。或者从 [v0.1.2 发行页](https://github.com/LydiaTools/art-motion-workbuddy/releases/tag/v0.1.2)下载完整 Skill 压缩包，解压后将整个 `art-motion-workbuddy` 文件夹放入对应 Skill 目录，刷新技能列表。请保留包内完整目录，不要只复制 `SKILL.md`。本版修复了片段渲染时缺少图标导致的误报，并让 `--spec` 相对路径按命令执行目录解析；原压缩包仍保留在仓库中。
+**安装方式：**Codex 用户可在项目里运行上方 `npx skills` 命令，安装固定为 v0.1.2 的轻量入口；首次使用时需要从发行页下载约 17 MB 的完整资源并校验哈希，也可使用已下载的同版本 ZIP。入口本身不包含引擎或渲染依赖；更新版本请查看本页面。或者从 [v0.1.2 发行页](https://github.com/LydiaTools/art-motion-workbuddy/releases/tag/v0.1.2)下载完整 Skill 压缩包，解压后将整个 `art-motion-workbuddy` 文件夹放入对应 Skill 目录，刷新技能列表。请保留包内完整目录，不要只复制 `SKILL.md`。本版也包含先前的图标误报和 `--spec` 相对路径修复；原压缩包仍保留在仓库中。
 
 **运行条件：**需要 Python、Playwright、Pillow、NumPy、浏览器、FFmpeg 和 FFprobe，可先运行 `python scripts/local_engine.py doctor` 检查。v0.1.2 在初始化的新工程中检查 FFmpeg 失败和中间视频缺失或为空的情况；已创建工程的引擎不会自动修改。退出成功或文件非空不等于视频可播放或符合要求，仍需检查画面与所需声音。具体镜头可能需要编写场景、调整节奏，音乐、配音和画面素材请自行提供或使用有权使用的资源。
 
